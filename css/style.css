@@ -1045,9 +1045,9 @@ footer {
     .hero-banner {
         background-attachment: scroll; /* Disables parallax on mobile */
         background-size: contain; /* Shows full image without cropping */
-        background-color: #000; /* Fallback color */
+        background-color: #FFFFFF; /* Fallback color */
         height: auto;
-        min-height: 70vh; /* Reduced height for mobile */
+        min-height: 50vh; /* Reduced height for mobile */
         padding: 20px 0; /* Adds breathing room */
     }
 
