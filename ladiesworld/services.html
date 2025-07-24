@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LadiesWorld012 - Luxury Beauty Salon</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+       <nav>
+            <div class="logo">
+                <a href="index.html">
+              <img src="images/logo.jpg" alt="LadiesWorld012 Beauty Salon" class="logo-img">
+              </a> 
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="services-container">
+        <h2><i class="fas fa-spa"></i> Our Services</h2>
+        
+        <div class="service-categories">
+            <button class="category-btn active" data-category="all">All Services</button>
+            <button class="category-btn" data-category="braiding">Braiding</button>
+            <button class="category-btn" data-category="ponytails">Ponytails</button>
+            <button class="category-btn" data-category="frontal">Frontal</button>
+            <button class="category-btn" data-category="bridal">Bridal</button>
+            <button class="category-btn" data-category="housecall">House Call</button>
+        </div>
+
+        <div class="services-grid">
+            <!-- Braiding Services -->
+            <div class="service-card" data-category="braiding">
+                <h3>Small Box Braids</h3>
+                <p class="duration">3-5 hours</p>
+                <p class="price">R400</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="braiding">
+                <h3>Medium Box Braids</h3>
+                <p class="duration">3-5 hours</p>
+                <p class="price">R350</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="braiding">
+                <h3>Large Box Braids</h3>
+                <p class="duration">3-5 hours</p>
+                <p class="price">R300</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="braiding">
+                <h3>Crochet Braids</h3>
+                <p class="duration">2-4 hours</p>
+                <p class="price">R350</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="braiding">
+                <h3>Basic Cornrows</h3>
+                <p class="duration">1-2 hours</p>
+                <p class="price">R150</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="braiding">
+                <h3>Design Cornrows</h3>
+                <p class="duration">1-2 hours</p>
+                <p class="price">R200</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <!-- Ponytail Services -->
+            <div class="service-card" data-category="ponytails">
+                <h3>Basic Ponytail</h3>
+                <p class="duration">1 hour</p>
+                <p class="price">R200</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="ponytails">
+                <h3>High Ponytail</h3>
+                <p class="duration">1.5 hours</p>
+                <p class="price">R250</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="ponytails">
+                <h3>Low Ponytail</h3>
+                <p class="duration">1.5 hours</p>
+                <p class="price">R250</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="ponytails">
+                <h3>Puffy Ponytail</h3>
+                <p class="duration">2 hours</p>
+                <p class="price">R300</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <!-- Frontal Services -->
+            <div class="service-card" data-category="frontal">
+                <h3>Basic Frontal Ponytail</h3>
+                <p class="duration">2.5 hours</p>
+                <p class="price">R450</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="frontal">
+                <h3>High Frontal Ponytail</h3>
+                <p class="duration">3 hours</p>
+                <p class="price">R500</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="frontal">
+                <h3>Bridal Frontal Ponytail</h3>
+                <p class="duration">5 hours</p>
+                <p class="price">R800</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <!-- Bridal Services -->
+            <div class="service-card" data-category="bridal">
+                <h3>Bridesmaid Style</h3>
+                <p class="duration">2.5 hours</p>
+                <p class="price">R450</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <div class="service-card" data-category="bridal">
+                <h3>Bridal Hair Trial</h3>
+                <p class="duration">5 hours</p>
+                <p class="price">R1,000</p>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+
+            <!-- House Call Services -->
+            <div class="service-card" data-category="housecall">
+                <h3>House Call Service</h3>
+                <p class="duration">Varies</p>
+                <p class="price">R500 call-out fee</p>
+                <small>Minimum 3 services required</small>
+                <a href="booking.html" class="btn-pink">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2024 LadiesWorld012. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple category filtering
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                // Update active button
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter services
+                document.querySelectorAll('.service-card').forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>
