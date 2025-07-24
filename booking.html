@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Appointment | LadiesWorld012</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+              <img src="images/logo.jpg" alt="LadiesWorld012 Beauty Salon" class="logo-img">
+              </a> 
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul>
+                <li><a href="index.html" >Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="booking.html" class="active">Book Now</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Booking Container -->
+    <section class="booking-container">
+        <!-- Step 1: Branch Selection -->
+        <div class="booking-step active" id="step1">
+            <h2><i class="fas fa-store"></i> Select Your Branch</h2>
+            <div class="branch-options">
+                <div class="branch-card" data-branch="brits">
+                    <h3>Brits Branch</h3>
+                    <p>Plaza Building, Shop 29, 45 van velden st</p>
+                    <button class="btn-pink">Select</button>
+                </div>
+                <div class="branch-card" data-branch="garankuwa">
+                    <h3>Ga-Rankuwa Branch</h3>
+                    <p>537 Phuduhudu street, phase 1, Ga-Rankuwa view, 0208</p>
+                    <button class="btn-pink">Select</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Booking Form + Payment -->
+        <div class="booking-step" id="step2">
+            <h2><i class="fas fa-calendar-alt"></i> Complete Your Booking</h2>
+            
+            <form id="bookingForm">
+                <!-- Service Selection -->
+                <div class="form-group">
+                    <label for="service">Service*</label>
+                    <select id="service" required>
+                        <option value="">-- Select Service --</option>
+                        
+                        <!-- Braiding Services -->
+                        <optgroup label="Braiding Services">
+                            <option value="small-box-braids">Small Box Braids - R400 (3-5 hrs)</option>
+                            <option value="medium-box-braids">Medium Box Braids - R350 (3-5 hrs)</option>
+                            <option value="large-box-braids">Large Box Braids - R300 (3-5 hrs)</option>
+                            <option value="crochet-braids">Crochet Braids - R350 (2-4 hrs)</option>
+                            <option value="basic-cornrows">Basic Cornrows - R150 (1-2 hrs)</option>
+                            <option value="design-cornrows">Design Cornrows - R200 (1-2 hrs)</option>
+                        </optgroup>
+                        
+                        <!-- Ponytail Services -->
+                        <optgroup label="Ponytail Services">
+                            <option value="basic-ponytail">Basic Ponytail - R200 (1 hr)</option>
+                            <option value="high-ponytail">High Ponytail - R250 (1.5 hrs)</option>
+                            <option value="low-ponytail">Low Ponytail - R250 (1.5 hrs)</option>
+                            <option value="puffy-ponytail">Puffy Ponytail - R300 (2 hrs)</option>
+                            <option value="boho-ponytail">Boho Ponytail - R350 (2.5 hrs)</option>
+                            <option value="braided-ponytail">Braided Ponytail - R350 (2.5 hrs)</option>
+                        </optgroup>
+                        
+                        <!-- Frontal Services -->
+                        <optgroup label="Frontal Services">
+                            <option value="basic-frontal">Basic Frontal Ponytail - R450 (2.5 hrs)</option>
+                            <option value="high-frontal">High Frontal Ponytail - R500 (3 hrs)</option>
+                            <option value="low-frontal">Low Frontal Ponytail - R500 (3 hrs)</option>
+                            <option value="bridal-frontal">Bridal Frontal Ponytail - R800 (5 hrs)</option>
+                        </optgroup>
+                        
+                        <!-- Hair Services -->
+                        <optgroup label="Hair Services">
+                            <option value="wash-blowout">Wash & Blowout - R250 (1.5 hrs)</option>
+                            <option value="silk-press">Silk Press - R300 (2 hrs)</option>
+                            <option value="hair-color-full">Hair Color (Full) - R800 (4 hrs)</option>
+                            <option value="hair-color-roots">Hair Color (Roots) - R500 (2.5 hrs)</option>
+                            <option value="hair-treatment">Hair Treatment - R400 (2.5 hrs)</option>
+                        </optgroup>
+                        
+                        <!-- Bridal Services -->
+                        <optgroup label="Bridal Services">
+                            <option value="bridesmaid-style">Bridesmaid Style - R450 (2.5 hrs)</option>
+                            <option value="bridal-trial">Bridal Hair Trial - R1000 (5 hrs)</option>
+                        </optgroup>
+                        
+                        <!-- House Call Services -->
+                        <optgroup label="House Call Services">
+                            <option value="house-call">House Call Service - R500 fee (Min 3 services)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <!-- Date/Time -->
+                <div class="form-group">
+                    <label for="date">Appointment Date*</label>
+                    <input type="text" id="date" placeholder="Select Date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Time Slot*</label>
+                    <select id="time" required>
+                        <option value="">-- Select Time --</option>
+                        <option value="9:00 AM">9:00 AM</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="12:00 PM">12:00 PM</option>
+                        <option value="1:00 PM">1:00 PM</option>
+                        <option value="2:00 PM">2:00 PM</option>
+                        <option value="3:00 PM">3:00 PM</option>
+                        <option value="4:00 PM">4:00 PM</option>
+                    </select>
+                </div>
+
+                <!-- Customer Details -->
+                <div class="form-group">
+                    <label for="name">Full Name*</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone*</label>
+                    <input type="tel" id="phone" required placeholder="0812345678">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <!-- Payment Section -->
+                <div class="payment-section">
+                    <h3><i class="fas fa-credit-card"></i> Payment Details</h3>
+                    <div class="bank-details">
+                        <p><strong>Bank Name:</strong> ABSA</p>
+                        <p><strong>Account Number:</strong> 1234567890</p>
+                        <p><strong>Account Type:</strong> Current Account</p>
+                        <p><strong>Reference:</strong> Your Name + Booking Date</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentProof">Upload Proof of Payment*</label>
+                        <input type="file" id="paymentProof" accept="image/*,.pdf" required>
+                    </div>
+
+                    <div class="terms-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I accept the <a href="#" class="view-terms">Terms & Conditions</a></label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-gold">Confirm Booking</button>
+                <button type="button" class="btn-gold-outline" id="backToBranches">Change Branch</button>
+            </form>
+        </div>
+
+        <!-- Terms Modal -->
+        <div class="terms-modal">
+            <div class="modal-content">
+                <span class="close-terms">&times;</span>
+                <h3><i class="fas fa-file-contract"></i> Booking Policies</h3>
+                <div class="terms-content">
+                    <h4>APPOINTMENT</h4>
+                    <ul>
+                        <li>Please be on time</li>
+                        <li>1-5 min late: Grace Period</li>
+                        <li>6-15 min late: Penalty fee R100</li>
+                        <li>16+ min late: Automatic Cancellation</li>
+                    </ul>
+                    
+                    <h4>RESCHEDULE</h4>
+                    <p>Notify us 6hrs prior. Failure to do so means you cannot change later.</p>
+                    
+                    <h4>LOCATION</h4>
+                    <p>BRITS & GA-RANKUWA - Select your preferred location</p>
+                    
+                    <h4>CANCELLATION</h4>
+                    <p>Cancel at least 6 hours prior. Cancellation fee is 100% (deposit).</p>
+                    
+                    <h4>PAYMENT</h4>
+                    <p>100% upfront payment is non-refundable</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div class="confirmation-modal">
+            <div class="modal-content">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h3>Booking Confirmed!</h3>
+                <div class="booking-summary"></div>
+                <p>We've sent details to your email.</p>
+                <button class="btn-pink" id="closeModal">Done</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2024 LadiesWorld012. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+     <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>

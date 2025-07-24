@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | LadiesWorld012 - Luxury Beauty Salon</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/salon-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .about-hero h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+        
+        .mission-card, .vision-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .mission-card i, .vision-card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .salon-features {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--pink);
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-grid img:hover {
+            transform: scale(1.03);
+        }
+        
+        @media (max-width: 768px) {
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-hero h2 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+              <img src="images/logo.jpg" alt="LadiesWorld012 Beauty Salon" class="logo-img">
+              </a> 
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <h2>LadiesWorld012</h2>
+            <p>Where beauty meets empowerment in Brits and Ga-Rankuwa</p>
+        </section>
+
+        <!-- Our Story -->
+        <section class="mission-vision">
+            <div class="mission-card">
+                <i class="fas fa-heart"></i>
+                <h3>Our Story</h3>
+                <p>Founded in 2020, LadiesWorld012 began as a small studio with big dreams. Today, we're proud to serve our communities in Brits and Ga-Rankuwa with premium beauty services that celebrate African hair and style.</p>
+            </div>
+            
+            <div class="vision-card">
+                <i class="fas fa-star"></i>
+                <h3>Our Promise</h3>
+                <p>We commit to using only quality products, maintaining strict hygiene standards, and providing services that enhance your natural beauty while protecting your hair's health.</p>
+            </div>
+        </section>
+
+        <!-- What Sets Us Apart -->
+        <section class="salon-features">
+            <h2><i class="fas fa-spa"></i> Why Choose LadiesWorld012</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Premium Products</h3>
+                    <p>We use only salon-grade products that nourish and protect your hair and skin.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Efficient Service</h3>
+                    <p>Our streamlined processes ensure you get quality results without wasting your time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Two Convenient Locations</h3>
+                    <p>Visit us in Brits or Ga-Rankuwa - both designed for your comfort and relaxation.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-gem"></i>
+                    <h3>Luxury Experience</h3>
+                    <p>From our decor to our service, every detail is crafted for an elevated beauty experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Salon Gallery -->
+        
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2024 LadiesWorld012. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
