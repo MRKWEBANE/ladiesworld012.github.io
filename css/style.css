@@ -1028,14 +1028,33 @@ footer {
 
 /* Add this to your existing CSS */
 .hero-banner {
-    background: url('../images/banner.jpg') center/cover no-repeat;
-    height: 100vh;
+    background: url('../images/banner.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
     color: white;
+    overflow: hidden; /* Prevents any overflow issues */
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .hero-banner {
+        background-attachment: scroll; /* Disables parallax on mobile */
+        background-size: contain; /* Shows full image without cropping */
+        background-color: #000; /* Fallback color */
+        height: auto;
+        min-height: 70vh; /* Reduced height for mobile */
+        padding: 20px 0; /* Adds breathing room */
+    }
+
+    /* Optional: Switch to a different cropped version for mobile */
+    /* .hero-banner {
+        background-image: url('../images/banner-mobile.jpg');
+    } */
 }
 
 .hero-banner::before {
@@ -1045,13 +1064,17 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Dark overlay for better text visibility */
+    background: rgba(0, 0, 0, 0.5); /* Stronger overlay for better contrast */
 }
 
 .hero-content {
     position: relative;
     z-index: 1;
+    width: 90%; /* Better mobile width */
+    margin: 0 auto;
+    padding: 20px;
 }
+
 
 /* Keep your existing .hero-content styles */
 
