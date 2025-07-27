@@ -1,4 +1,86 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // ======================
+    // DROPDOWN ENHANCEMENTS
+    // ======================
+    function createCustomSelect() {
+        const serviceSelect = document.getElementById('service');
+        const container = serviceSelect.parentElement;
+        
+        // Create custom select structure
+        const customSelect = document.createElement('div');
+        customSelect.className = 'custom-select';
+        customSelect.innerHTML = `
+            <div class="custom-select__trigger">
+                <span>-- Select Service --</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="custom-select__options"></div>
+        `;
+        
+        // Populate options
+        const optionsContainer = customSelect.querySelector('.custom-select__options');
+        let currentOptgroup = null;
+        
+        Array.from(serviceSelect.children).forEach(option => {
+            if (option.tagName === 'OPTGROUP') {
+                // Add optgroup label
+                const optgroupLabel = document.createElement('div');
+                optgroupLabel.className = 'custom-option optgroup-label';
+                optgroupLabel.textContent = option.label;
+                optionsContainer.appendChild(optgroupLabel);
+                
+                // Add options in this group
+                Array.from(option.children).forEach(opt => {
+                    const optElement = document.createElement('div');
+                    optElement.className = 'custom-option';
+                    optElement.dataset.value = opt.value;
+                    optElement.innerHTML = opt.text;
+                    optionsContainer.appendChild(optElement);
+                });
+            } else if (option.tagName === 'OPTION') {
+                const optElement = document.createElement('div');
+                optElement.className = 'custom-option';
+                optElement.dataset.value = option.value;
+                optElement.innerHTML = option.text;
+                optionsContainer.appendChild(optElement);
+            }
+        });
+        
+        // Replace original select
+        serviceSelect.style.display = 'none';
+        container.appendChild(customSelect);
+        
+        // Add interaction
+        const trigger = customSelect.querySelector('.custom-select__trigger');
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('open');
+        });
+        
+        document.querySelectorAll('.custom-option:not(.optgroup-label)').forEach(option => {
+            option.addEventListener('click', () => {
+                serviceSelect.value = option.dataset.value;
+                trigger.querySelector('span').textContent = option.textContent;
+                customSelect.classList.remove('open');
+                
+                // Update price display if you have one
+                updateServicePriceDisplay();
+            });
+        });
+        
+        // Close when clicking outside
+        document.addEventListener('click', () => {
+            customSelect.classList.remove('open');
+        });
+    }
+    
+    // Initialize custom select immediately
+    createCustomSelect();
+
+    // ======================
+    // EXISTING FUNCTIONALITY
+    // ======================
+    
     // Initialize date picker
     flatpickr("#date", {
         minDate: "today",
@@ -162,5 +244,24 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('step2').classList.remove('active');
         document.getElementById('step1').classList.add('active');
         bookingData = {};
+        
+        // Reset custom select display
+        const customSelect = document.querySelector('.custom-select');
+        if (customSelect) {
+            customSelect.querySelector('.custom-select__trigger span').textContent = '-- Select Service --';
+        }
+    }
+    
+    function updateServicePriceDisplay() {
+        // Add this if you want to show prices when selecting services
+        const serviceSelect = document.getElementById('service');
+        const priceDisplay = document.getElementById('price-display'); // Add this element to your HTML
+        
+        if (priceDisplay && serviceSelect.value) {
+            const priceMatch = serviceSelect.selectedOptions[0].text.match(/R(\d+)/);
+            if (priceMatch) {
+                priceDisplay.textContent = `Price: R${priceMatch[1]}`;
+            }
+        }
     }
 });
