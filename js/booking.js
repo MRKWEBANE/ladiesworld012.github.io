@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Debugging - log when DOM is loaded
     console.log('Document loaded, initializing booking system...');
 
     // ============= IMAGE PREVIEW SYSTEM =============
@@ -8,18 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const previewImage = document.getElementById('service-preview-image');
     const previewNote = document.getElementById('preview-note');
 
-    // Debug image elements
-    console.log('Preview elements:', {
-        container: previewContainer,
-        image: previewImage,
-        note: previewNote
-    });
-
     // ============= ENHANCED DROPDOWN =============
     function createCustomSelect() {
         const container = serviceSelect.parentElement;
         
-        // Create custom select structure
         const customSelect = document.createElement('div');
         customSelect.className = 'custom-select';
         customSelect.innerHTML = `
@@ -30,18 +21,15 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="custom-select__options"></div>
         `;
 
-        // Populate options
         const optionsContainer = customSelect.querySelector('.custom-select__options');
         
         Array.from(serviceSelect.children).forEach(option => {
             if (option.tagName === 'OPTGROUP') {
-                // Add category headers
                 const optgroupLabel = document.createElement('div');
                 optgroupLabel.className = 'custom-option optgroup-label';
                 optgroupLabel.textContent = option.label;
                 optionsContainer.appendChild(optgroupLabel);
                 
-                // Add services in category
                 Array.from(option.children).forEach(opt => {
                     optionsContainer.appendChild(createCustomOption(opt));
                 });
@@ -50,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Create selectable option
         function createCustomOption(option) {
             const optElement = document.createElement('div');
             optElement.className = 'custom-option';
@@ -62,37 +49,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 const value = option.value;
                 const text = option.text;
                 const image = option.dataset.image;
-                console.log('Service selected:', {value, text, image});
                 
-                // Update the hidden original select
                 serviceSelect.value = value;
-                
-                // Update UI
                 customSelect.querySelector('.custom-select__trigger span').textContent = text;
                 customSelect.classList.remove('open');
                 
-                // Handle image preview
                 if (image) {
-                    const imagePath = `images/${image}`;
-                    console.log('Loading image:', imagePath);
-                    previewImage.src = imagePath;
-                    previewImage.onload = function() {
-                        console.log('Image loaded successfully');
-                        previewContainer.style.display = 'block';
-                    };
-                    previewImage.onerror = function() {
-                        console.error('Failed to load image:', imagePath);
-                        previewContainer.style.display = 'none';
-                    };
+                    previewImage.src = `images/${image}`;
+                    previewContainer.style.display = 'block';
                     
-                    // Set service-specific notes
                     if (value === 'custom-install') {
                         previewNote.textContent = "Please come 1 hour prior for customization services";
                     } else if (value === 'lagos-hairline') {
                         previewNote.textContent = "Note: This modification cannot be undone";
                     }
                 } else {
-                    console.log('No image for this service');
                     previewContainer.style.display = 'none';
                 }
             });
@@ -100,41 +71,30 @@ document.addEventListener('DOMContentLoaded', function() {
             return optElement;
         }
 
-        // Toggle dropdown
         const trigger = customSelect.querySelector('.custom-select__trigger');
         trigger.addEventListener('click', function(e) {
             e.stopPropagation();
             customSelect.classList.toggle('open');
         });
 
-        // Close when clicking outside
         document.addEventListener('click', function(e) {
             if (!customSelect.contains(e.target)) {
                 customSelect.classList.remove('open');
             }
         });
 
-        // Replace original select
         serviceSelect.style.display = 'none';
         container.appendChild(customSelect);
-        
-        console.log('Custom select initialized');
     }
 
-    // Initialize the enhanced dropdown
     createCustomSelect();
 
     // ============= DATE PICKER =============
     flatpickr("#date", {
         minDate: "today",
         dateFormat: "Y-m-d",
-        disable: [
-            function(date) {
-                return (date.getDay() === 0); // Disable Sundays
-            }
-        ]
+        disable: [date => date.getDay() === 0]
     });
-    console.log('Date picker initialized');
 
     // ============= BRANCH SELECTION =============
     const bookingData = {};
@@ -150,25 +110,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 address: branchCard.querySelector('p').textContent
             };
             
-            // Update UI
             document.querySelectorAll('.branch-card').forEach(card => {
                 card.classList.remove('selected');
             });
             branchCard.classList.add('selected');
             
-            // Go to booking form
             document.getElementById('step1').classList.remove('active');
             document.getElementById('step2').classList.add('active');
-            
-            console.log('Branch selected:', bookingData.branch);
         });
     });
 
-    // Back button
     document.getElementById('backToBranches').addEventListener('click', function() {
         document.getElementById('step2').classList.remove('active');
         document.getElementById('step1').classList.add('active');
-        console.log('Returned to branch selection');
     });
 
     // ============= TERMS MODAL =============
@@ -176,47 +130,91 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.view-terms').addEventListener('click', function(e) {
         e.preventDefault();
         termsModal.style.display = 'flex';
-        console.log('Terms modal opened');
     });
 
     document.querySelector('.close-terms').addEventListener('click', function() {
         termsModal.style.display = 'none';
-        console.log('Terms modal closed');
     });
 
-    // ============= FORM SUBMISSION =============
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        console.log('Form submission started');
+    // ============= FORM VALIDATION HELPERS =============
+    function validateForm() {
+        let isValid = true;
         
-        // Validate terms
+        // Clear previous errors
+        document.querySelectorAll('.error').forEach(el => {
+            el.classList.remove('error');
+        });
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.remove();
+        });
+
+        // Check all required fields
+        document.querySelectorAll('#bookingForm [required]').forEach(field => {
+            if (!field.value) {
+                field.classList.add('error');
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'error-message';
+                errorMsg.textContent = 'This field is required';
+                field.parentNode.appendChild(errorMsg);
+                isValid = false;
+            }
+        });
+
+        // Special validation for terms checkbox
         if (!document.getElementById('terms').checked) {
-            alert("Please accept the Terms & Conditions");
-            console.warn('Form rejected - terms not accepted');
-            return;
+            const termsLabel = document.querySelector('.terms-group label');
+            termsLabel.classList.add('error');
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'error-message';
+            errorMsg.textContent = 'You must accept the terms';
+            termsLabel.parentNode.appendChild(errorMsg);
+            isValid = false;
         }
 
         // Validate payment proof
         const paymentProof = document.getElementById('paymentProof').files[0];
         if (!paymentProof) {
-            alert("Please upload proof of payment");
-            console.warn('Form rejected - no payment proof');
+            const paymentGroup = document.getElementById('paymentProof').parentNode;
+            paymentGroup.classList.add('error');
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'error-message';
+            errorMsg.textContent = 'Please upload payment proof';
+            paymentGroup.appendChild(errorMsg);
+            isValid = false;
+        } else if (paymentProof.size > 10 * 1024 * 1024) { // 10MB limit
+            const paymentGroup = document.getElementById('paymentProof').parentNode;
+            paymentGroup.classList.add('error');
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'error-message';
+            errorMsg.textContent = 'File must be smaller than 10MB';
+            paymentGroup.appendChild(errorMsg);
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    // ============= FORM SUBMISSION =============
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Validate form
+        if (!validateForm()) {
             return;
         }
 
-        // Get selected service
+        // Get form data
         const serviceId = serviceSelect.value;
         const serviceText = serviceSelect.selectedOptions[0].text;
-        
-        // Extract price
         const priceMatch = serviceText.match(/R(\d+)/);
-        const price = priceMatch ? parseInt(priceMatch[1]) : 0;
+        const price = priceMatch ? priceMatch[1] : '0';
 
         // Store booking data
         bookingData.service = {
             id: serviceId,
             name: serviceText.split(' - ')[0],
-            price: price
+            price: price,
+            description: serviceText
         };
         bookingData.date = document.getElementById('date').value;
         bookingData.time = document.getElementById('time').value;
@@ -225,10 +223,63 @@ document.addEventListener('DOMContentLoaded', function() {
             email: document.getElementById('email').value,
             phone: document.getElementById('phone').value
         };
+        
+        const paymentProof = document.getElementById('paymentProof').files[0];
         bookingData.paymentProof = paymentProof.name;
 
-        console.log('Booking data prepared:', bookingData);
-        showConfirmation();
+        // Prepare Formspree submission
+        const formData = new FormData();
+        
+        // Add all form data
+        formData.append('_subject', `New Booking from ${bookingData.customer.name}`);
+        formData.append('_replyto', bookingData.customer.email);
+        formData.append('_honeypot', ''); // Spam prevention
+        formData.append('branch', JSON.stringify(bookingData.branch));
+        formData.append('service', JSON.stringify(bookingData.service));
+        formData.append('date', bookingData.date);
+        formData.append('time', bookingData.time);
+        formData.append('customer_name', bookingData.customer.name);
+        formData.append('customer_email', bookingData.customer.email);
+        formData.append('customer_phone', bookingData.customer.phone);
+        formData.append('payment_proof', paymentProof);
+
+        try {
+            // Show loading state
+            const submitBtn = document.querySelector('#bookingForm button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+            // Send to Formspree
+            const response = await fetch('https://formspree.io/f/xeozkqnw', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            const responseData = await response.json();
+
+            // Reset button state
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+
+            if (response.ok) {
+                console.log('Form successfully submitted to Formspree', responseData);
+                showConfirmation();
+            } else {
+                console.error('Formspree submission failed', responseData);
+                alert('Submission failed: ' + (responseData.error || 'Please try again or contact us directly'));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Network error - please try again or contact us directly');
+            
+            // Fallback to simple form submission if JS fails
+            this.removeEventListener('submit', arguments.callee);
+            this.submit();
+        }
     });
 
     // ============= CONFIRMATION MODAL =============
@@ -248,14 +299,11 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         modal.style.display = 'flex';
-        console.log('Confirmation modal shown');
     }
 
-    // Close confirmation
     document.getElementById('closeModal').addEventListener('click', function() {
         document.querySelector('.confirmation-modal').style.display = 'none';
         resetForm();
-        console.log('Confirmation modal closed');
     });
 
     function resetForm() {
@@ -271,22 +319,6 @@ document.addEventListener('DOMContentLoaded', function() {
             customSelect.querySelector('.custom-select__trigger span').textContent = '-- Select Service --';
         }
         
-        if (previewContainer) {
-            previewContainer.style.display = 'none';
-        }
-        
-        console.log('Form reset to initial state');
+        previewContainer.style.display = 'none';
     }
-
-    // Debugging - check if images exist
-    function verifyImages() {
-        const servicesWithImages = Array.from(serviceSelect.querySelectorAll('option[data-image]'));
-        console.log('Services that should have images:', servicesWithImages.map(opt => ({
-            value: opt.value,
-            image: opt.dataset.image,
-            text: opt.text
-        })));
-    }
-
-    verifyImages();
 });
