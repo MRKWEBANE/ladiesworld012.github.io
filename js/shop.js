@@ -22,26 +22,79 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize form state
     function initForm() {
         document.getElementById('order-ref').textContent = orderNumber;
-        // Set collection as default
         document.querySelector('input[name="delivery"][value="collection"]').checked = true;
         deliveryAddressField.style.display = 'none';
         customerAddressInput.removeAttribute('required');
     }
 
-    // Toggle cart sidebar
+    // Enhanced filtering functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Update active state
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            const filter = button.dataset.filter;
+            
+            // Filter products
+            productCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
+                const blockquote = card.querySelector('blockquote');
+                
+                // Improved class detection
+                const isClass = blockquote !== null || 
+                              title.includes('class') || 
+                              title.includes('course') || 
+                              title.includes('training') ||
+                              title.includes('beginner') || 
+                              title.includes('advanced');
+                
+                // Improved revamp detection
+                const isRevamp = title.includes('revamp') || 
+                               description.includes('revamp') ||
+                               description.includes('wash') ||
+                               description.includes('condition') ||
+                               description.includes('treatment') ||
+                               description.includes('cleanse') ||
+                               description.includes('hydrate');
+                
+                switch(filter) {
+                    case 'all':
+                        card.style.display = 'block';
+                        break;
+                    case 'class':
+                        card.style.display = isClass ? 'block' : 'none';
+                        break;
+                    case 'revamp':
+                        card.style.display = isRevamp ? 'block' : 'none';
+                        break;
+                }
+            });
+        });
+    });
+
+    // Add to cart functionality
     document.querySelectorAll('.add-to-cart').forEach(btn => {
         btn.addEventListener('click', function() {
             const productCard = this.closest('.product-card');
+            const productName = productCard.querySelector('h3').textContent;
+            const priceElement = productCard.querySelector('.price');
+            const productPriceText = priceElement ? priceElement.textContent : '';
+            
             const product = {
-                id: productCard.querySelector('img').src.split('/').pop().split('.')[0],
-                name: productCard.querySelector('h3').textContent,
-                price: parseFloat(productCard.querySelector('.price').textContent.replace('R', '')),
+                id: productName.toLowerCase().replace(/\s+/g, '-') + '-' + Date.now(),
+                name: productName,
+                price: productPriceText ? parseFloat(productPriceText.replace('R', '')) : 0,
                 quantity: parseInt(productCard.querySelector('.quantity').textContent),
-                image: productCard.querySelector('img').src
+                image: productCard.querySelector('img') ? productCard.querySelector('img').src : 'images/default-product.jpg',
+                description: productCard.querySelector('p') ? productCard.querySelector('p').textContent : ''
             };
             
-            // Add to cart or update quantity
-            const existingItem = cart.find(item => item.id === product.id);
+            const existingItem = cart.find(item => item.name === product.name && item.price === product.price);
             if (existingItem) {
                 existingItem.quantity += product.quantity;
             } else {
@@ -83,8 +136,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 <img src="${item.image}" alt="${item.name}">
                 <div class="cart-item-info">
                     <h4>${item.name}</h4>
-                    <p>R${item.price.toFixed(2)} × ${item.quantity}</p>
-                    <p>R${(item.price * item.quantity).toFixed(2)}</p>
+                    ${item.description ? `<p class="item-desc">${item.description}</p>` : ''}
+                    ${item.price > 0 ? `<p>R${item.price.toFixed(2)} × ${item.quantity}</p>` : ''}
+                    ${item.price > 0 ? `<p>R${(item.price * item.quantity).toFixed(2)}</p>` : ''}
                 </div>
                 <button class="remove-item" data-index="${index}">
                     <i class="fas fa-times"></i>
@@ -124,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('input[name="delivery"]').forEach(radio => {
         radio.addEventListener('change', function() {
             updateCart();
-            // Show/hide address field based on delivery method
             if (this.value === 'collection') {
                 deliveryAddressField.style.display = 'none';
                 customerAddressInput.removeAttribute('required');
@@ -142,14 +195,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Update order number in payment modal
         document.getElementById('order-ref').textContent = orderNumber;
         paymentModal.style.display = 'flex';
     });
 
     // Confirm payment
     confirmPaymentBtn.addEventListener('click', function() {
-        // Validate inputs
         if (!customerNameInput.value || !customerPhoneInput.value) {
             alert('Please fill in your name and phone number');
             return;
@@ -166,14 +217,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Validate phone number format (South African)
         const phoneRegex = /^(\+27|0)[6-8][0-9]{8}$/;
         if (!phoneRegex.test(customerPhoneInput.value.replace(/\s/g, ''))) {
             alert('Please enter a valid South African phone number (e.g., 0812345678 or +27812345678)');
             return;
         }
         
-        // Prepare order data
         const orderData = {
             orderNumber: orderNumber,
             date: new Date().toLocaleString(),
@@ -190,17 +239,15 @@ document.addEventListener('DOMContentLoaded', function() {
             paymentProof: document.getElementById('payment-proof').files[0].name,
             additionalNotes: document.getElementById('customer-note').value,
             bankDetails: {
-                name: "ABSA",
-                accountNumber: "1234567890",
+                name: "CAPITEC BUSINESS",
+                accountNumber: "1052019234",
                 accountType: "Current Account",
-                reference: orderNumber
+                reference: "Your whatsApp Number",
             }
         };
         
-        // In a real app, you would send this to your server
         console.log('Order submitted:', orderData);
         
-        // Show confirmation
         const confirmationMessage = `Thank you, ${orderData.customer.name}!
         
 Order #${orderNumber} submitted successfully!
@@ -210,7 +257,6 @@ We'll contact you on ${orderData.customer.phone} to confirm ${orderData.delivery
 
         alert(confirmationMessage);
         
-        // Reset form and cart
         resetOrder();
     });
 
@@ -220,14 +266,12 @@ We'll contact you on ${orderData.customer.phone} to confirm ${orderData.delivery
         paymentModal.style.display = 'none';
         orderNumber = generateOrderNumber();
         
-        // Clear form inputs
         customerNameInput.value = '';
         customerPhoneInput.value = '';
         customerAddressInput.value = '';
         document.getElementById('payment-proof').value = '';
         document.getElementById('customer-note').value = '';
         
-        // Reset to default state
         initForm();
     }
 
@@ -259,16 +303,3 @@ We'll contact you on ${orderData.customer.phone} to confirm ${orderData.delivery
     // Initialize the form
     initForm();
 });
-
-
-// When opening cart
-function openCart() {
-  document.querySelector('.cart-sidebar').classList.add('active');
-  document.querySelector('.cart-backdrop').style.display = 'block';
-}
-
-// When closing cart
-function closeCart() {
-  document.querySelector('.cart-sidebar').classList.remove('active');
-  document.querySelector('.cart-backdrop').style.display = 'none';
-}
