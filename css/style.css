@@ -144,9 +144,9 @@ footer {
 }
 
 .section-title {
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Montserrat', sans-serif;
     font-size: 3rem;
-    color: var(--gold);
+    color: #000000;
     text-align: center;
     margin-bottom: 0.5rem;
 }
@@ -154,7 +154,7 @@ footer {
 .section-subtitle {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
-    color: #666;
+    color: #000000;
     margin-bottom: 2rem;
 }
 
@@ -210,7 +210,7 @@ footer {
 .category-btn {
     background: var(--white);
     border: 1px solid var(--pink);
-    color: var(--pink);
+    color: #000000;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
     font-family: 'Montserrat', sans-serif;
@@ -220,7 +220,7 @@ footer {
 
 .category-btn.active {
     background: var(--pink);
-    color: var(--white);
+    color: #000000;
 }
 
 .service-options {
@@ -245,7 +245,7 @@ footer {
 
 .service-card.selected {
     background: var(--pink);
-    color: var(--white);
+    color: #000000;
 }
 
 /* Date/Time Picker */
@@ -308,7 +308,7 @@ footer {
 /* Buttons */
 .btn-pink {
     background: var(--pink);
-    color: var(--white);
+    color: #000000;
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
@@ -598,7 +598,7 @@ footer {
     justify-content: center;
     width: 40px;
     height: 40px;
-    background: var(--gold);
+    background: pink;
     color: white;
     border-radius: 50%;
     transition: all 0.3s;
@@ -1732,4 +1732,61 @@ select#service option {
     #service-preview-image {
         max-height: 200px;
     }
+}
+
+
+
+
+/* Formspree file upload styling */
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed var(--pink);
+    border-radius: 8px;
+    background: var(--off-white);
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    background: var(--pink);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+
+
+
+/* Product Filters */
+.product-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background: #d4347f;
+    color: white;
+    border-color: #d4347f;
+}
+
+.filter-btn:hover {
+    background: #e0e0e0;
+}
+
+.filter-btn.active:hover {
+    background: #c12b6f;
 }
