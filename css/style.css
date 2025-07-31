@@ -1001,6 +1001,14 @@ footer {
     background-image: url('../images/new2.jpg');
 }
 
+.policy-section {
+    background-image: url('../images/policy.jpg');
+}
+
+.training-section {
+    background-image: url('../images/training.jpg');
+}
+
 .section-btn {
     display: inline-block;
     padding: 12px 30px;
