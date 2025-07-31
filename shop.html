@@ -823,43 +823,48 @@
         <span class="close-payment">&times;</span>
         <h3><i class="fas fa-credit-card"></i> Complete Your Order</h3>
         
-        <!-- Customer Information Form -->
-        <div class="form-group">
-            <label for="customer-name">Full Name*</label>
-            <input type="text" id="customer-name" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="customer-phone">Phone Number*</label>
-            <input type="tel" id="customer-phone" required>
-        </div>
-        
-        <!-- Delivery Address (shown only if delivery selected) -->
-        <div class="form-group delivery-address">
-            <label for="customer-address">Delivery Address*</label>
-            <textarea id="customer-address" rows="3" required></textarea>
-        </div>
-        
-        <!-- Your Banking Details -->
-        <div class="bank-details">
-            <h4><i class="fas fa-university"></i> Banking Details</h4>
-            <p><strong>Bank Name:</strong> CAPITEC BUSINESS</p>
-            <p><strong>Account Number:</strong> 1052019234</p>
-            <p><strong>Account Type:</strong> BUSINESS Account</p>
-            <p><strong>Reference:</strong> <span id="order-ref">Your WhastApp no</span></p>
-            <p class="small">Send the proof of payment on our WhatsApp no: 065 937 9090</p>
-        </div>
-        
-        <!-- Payment Proof -->
-        
-        
-        <!-- Additional Notes -->
-        <div class="form-group">
-            <label for="customer-note">Additional Instructions</label>
-            <textarea id="customer-note" rows="2"></textarea>
-        </div>
-        
-        <button class="btn-gold confirm-payment">Confirm Order</button>
+        <!-- Modified form with Web3Forms integration -->
+        <form action="https://api.web3forms.com/submit" method="POST" class="web3form">
+            <input type="hidden" name="access_key" value="3ea827ac-37fe-4df4-acea-438f9e149052">
+            
+            
+            <!-- Customer Information Form -->
+            <div class="form-group">
+                <label for="customer-name">Full Name*</label>
+                <input type="text" id="customer-name" name="Full Name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="customer-phone">Phone Number*</label>
+                <input type="tel" id="customer-phone" name="Phone Number" required>
+            </div>
+            
+            <!-- Delivery Address (shown only if delivery selected) -->
+            <div class="form-group delivery-address">
+                <label for="customer-address">Delivery Address*</label>
+                <textarea id="customer-address" name="Delivery Address" rows="3" required></textarea>
+            </div>
+            
+            <!-- Your Banking Details -->
+            <div class="bank-details">
+                <h4><i class="fas fa-university"></i> Banking Details</h4>
+                <p><strong>Bank Name:</strong> CAPITEC BUSINESS</p>
+                <p><strong>Account Number:</strong> 1052019234</p>
+                <p><strong>Account Type:</strong> BUSINESS Account</p>
+                <p><strong>Reference:</strong> <span id="order-ref">Your WhatsApp no</span></p>
+                <p class="small">Send the proof of payment on our WhatsApp no: 065 937 9090</p>
+            </div>
+            
+            <!-- Payment Proof -->
+            
+            <!-- Additional Notes -->
+            <div class="form-group">
+                <label for="customer-note">Additional Instructions</label>
+                <textarea id="customer-note" name="Additional Instructions" rows="2"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-gold confirm-payment">Confirm Order</button>
+        </form>
     </div>
 </div>
     </section>
@@ -867,9 +872,9 @@
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://wa.me/27659379090"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/27812345678"><i class="fab fa-whatsapp"></i></a>
                 <a href="https://instagram.com/ladiesworld012"><i class="fab fa-instagram"></i></a>
-                <a href="tel:+27659379090"><i class="fas fa-phone"></i></a>
+                <a href="tel:+27812345678"><i class="fas fa-phone"></i></a>
             </div>
             <p>&copy; 2024 LadiesWorld012. All rights reserved.</p>
         </div>
