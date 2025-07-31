@@ -1044,7 +1044,7 @@ footer {
 
 /* Add this to your existing CSS */
 .hero-banner {
-    background: url('../images/banner.jpg') no-repeat center center;
+    background: url('../images/new3.jpg') no-repeat center center;
     background-size: cover;
     min-height: 100vh;
     display: flex;
@@ -1063,7 +1063,7 @@ footer {
         background-size: contain; /* Shows full image without cropping */
         background-color: #FFFFFF; /* Fallback color */
         height: auto;
-        min-height: 50vh; /* Reduced height for mobile */
+         /* Reduced height for mobile */
         padding: 20px 0; /* Adds breathing room */
     }
 
